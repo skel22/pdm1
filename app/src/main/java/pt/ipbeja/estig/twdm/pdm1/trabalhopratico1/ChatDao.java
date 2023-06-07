@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.Date;
 import java.util.List;
 
 @Dao
@@ -13,8 +14,11 @@ public interface ChatDao {
     @Query("SELECT * FROM chat")
     List<Chat> getAll();
 
-    @Query("SELECT * FROM chat WHERE id = :chatId")
+    @Query("SELECT * FROM chat WHERE chatId = :chatId")
     Chat getById(long chatId);
+
+    @Query("UPDATE chat SET date = :date WHERE chatId = :chatId")
+    void updateDate(String date, int chatId);
 
     @Insert
     void insert(Chat chat);

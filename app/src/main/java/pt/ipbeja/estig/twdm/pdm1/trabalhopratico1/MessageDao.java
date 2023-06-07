@@ -1,7 +1,5 @@
 package pt.ipbeja.estig.twdm.pdm1.trabalhopratico1;
 
-import android.os.Message;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -12,7 +10,7 @@ import java.util.List;
 
 @Dao
 public interface MessageDao {
-    @Query("SELECT * FROM MessageActivity")
+    @Query("SELECT * FROM Message")
     List<Message> getAll();
 
     @Insert

@@ -4,11 +4,14 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -16,24 +19,21 @@ import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
     private List<Chat> chatList;
-    private ChatAdapterEventListener chatEventListener;
+    //private ChatAdapterEventListener chatEventListener;
 
-    public ChatAdapter(ChatAdapterEventListener chatEventListener){
+    public ChatAdapter(){
         this.chatList = new ArrayList<>();
-        this.chatEventListener = chatEventListener;
     }
 
     @NonNull
     @Override
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_room_items, parent,false);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item, parent,false);
         return new ChatViewHolder(rootView);
     }
 
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position){
         final Chat chat = this.chatList.get(position);
-        holder.textViewUserReply.setText(chat.getMessage());
-        Glide.with(holder.rootView.getContext()).load(chat.getText()).into(holder.textViewUserReply);
 
         holder.rootView.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -54,19 +54,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     public class ChatViewHolder extends RecyclerView.ViewHolder{
         private View rootView;
+        private TextView textViewTab;
+        private TextView textViewLastMsg;
+        private ImageView imageViewChatIcon;
 
-        private View textViewUserReply;
-
-        public ChatViewHolder(@NonNull View view){
+        public ChatViewHolder(@NonNull View rootView){
             super(rootView);
             this.rootView = rootView;
-            this.textViewUserReply = rootView.findViewById(R.id.textViewUserReply);
-            this.
+            this.textViewTab = rootView.findViewById(R.id.textViewTabTitle);
+            this.textViewLastMsg = rootView.findViewById(R.id.textViewLastMsg);
+            this.imageViewChatIcon = rootView.findViewById(R.id.imageViewChatIcon);
         }
-    }
-
-    public interface ChatAdapterEventListener{
-        void onChatEventListener(long chatId);
-        void onChatLongClicked(long chatId);
     }
 }

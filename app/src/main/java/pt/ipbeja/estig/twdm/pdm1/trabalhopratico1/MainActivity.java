@@ -1,23 +1,29 @@
 package pt.ipbeja.estig.twdm.pdm1.trabalhopratico1;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
+    private ChatAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewMain);
+
+        AppDatabase db = AppDatabase.getInstance(this);
+        ChatDao chatDao = db.getChatDao();
+
+        this.adapter = new ChatAdapter();
+        recyclerView.setAdapter(this.adapter);
+    }
 
     protected void onStart(){
         super.onStart();
@@ -26,37 +32,7 @@ public class MainActivity extends AppCompatActivity {
         this.adapter.refreshList(newChatList);
     }
 
-    public void onChatLongClicked(long chatId){
-        ChatDao chatDao = AppDatabase.getInstance(MainActivity.this).getChatDao();
-        Chat chat = chatDao.getById(chatId);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("Delete Chat");
-        builder.setMessage("Do you want to delete" + chat.getName() + "?");
-
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                chatDao.delete(chat);
-                List<Chat> newList = chatDao.getAll();
-                adapter.refreshList(newList);
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
     public void addChat(View view){
-        AddChat.start(this);
+        AddChatActivity.start(this);
     }
 }

@@ -3,31 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp">
-
-    <TextView
-        android:id="@+id/textViewTab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is a chat"
-        android:textColor="#000000"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.786" />
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewChatIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewTab"
-        app:layout_constraintEnd_toStartOf="@+id/textViewTab"
-        app:layout_constraintTop_toTopOf="@+id/textViewTab"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTabTitle"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTabTitle"
+        app:layout_constraintTop_toTopOf="@+id/textViewTabTitle"
         app:srcCompat="@android:drawable/stat_notify_chat" />
 
     <TextView
@@ -36,8 +21,18 @@
         android:layout_height="wrap_content"
         android:text="Chat Room 1"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTab"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTab"
-        app:layout_constraintStart_toStartOf="@+id/textViewTab"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.304" />
+
+    <TextView
+        android:id="@+id/textViewLastMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTabTitle"
+        app:layout_constraintStart_toStartOf="@+id/textViewTabTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTabTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
